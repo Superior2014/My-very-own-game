@@ -1,0 +1,91 @@
+import time
+
+# Define the player class
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.health = 100
+        self.inventory = []
+
+    def __str__(self):
+        return f"{self.name} - Health: {self.health}%"
+
+# Define the Room class
+class Room:
+    def __init__(self, name, description, options):
+        self.name = name
+        self.description = description
+        self.options = options
+
+# Define the game map
+rooms = {
+    'start': Room(
+        'Start Room',
+        'You wake up in a dimly lit room. There is a door in front of you.',
+        ['open door', 'look around']
+    ),
+    'corridor': Room(
+        'Corridor',
+        'You are in a long corridor with flickering lights. You hear strange noises coming from the darkness ahead.',
+        ['go forward', 'go back', 'search for items']
+    ),
+    'control_room': Room(
+        'Control Room',
+        'You find yourself in a control room with various buttons and screens.',
+        ['press button', 'inspect screens', 'look for exit']
+    ),
+    # Add more rooms as needed
+}
+
+# Define game functions
+def display_room(room):
+    print(room.name)
+    print(room.description)
+    print("Options:")
+    for option in room.options:
+        print(option)
+
+def game_over():
+    print("Game over. You failed to survive the challenges of the space station.")
+    time.sleep(2)
+    print("Thanks for playing!")
+
+def game_win():
+    print("Congratulations! You successfully navigated through the space station and escaped!")
+    time.sleep(2)
+    print("Thanks for playing!")
+
+# Main game loop
+def main():
+    player_name = input("Welcome to the Sci-Fi Adventure Game! Please enter your name: ")
+    player = Player(player_name)
+
+    current_room = rooms['start']
+    while True:
+        display_room(current_room)
+
+        # Player input
+        choice = input("What do you want to do? ").lower()
+
+        # Handle player choices
+        if choice in current_room.options:
+            if current_room.name == 'start' and choice == 'open door':
+                print("You open the door and step into the corridor.")
+                current_room = rooms['corridor']
+            elif current_room.name == 'corridor' and choice == 'go forward':
+                print("You cautiously move forward into the darkness.")
+                current_room = rooms['control_room']
+            # Add more choice conditions for each room
+            else:
+                print("You can't do that here.")
+        else:
+            print("Invalid choice.")
+
+        # Check for game over or win conditions
+        if current_room.name == 'control_room':
+            game_win()
+            break
+
+# Run the game
+if __name__ == "__main__":
+    main()
