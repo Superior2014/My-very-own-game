@@ -1,0 +1,24 @@
+import sympy as sp
+
+def variable_calculator():
+    while True:
+        expression = input("Enter an expression (use 'x' as the variable): ")
+        
+        if expression.lower() == 'quit':
+            print("Exiting calculator.")
+            break
+        
+        try:
+            x = sp.symbols('x')
+            result = sp.sympify(expression)
+            print(f"Result: {result.evalf()}")
+        except sp.SympifyError:
+            print("Invalid expression. Please try again.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    print("Welcome to the Variable Calculator!")
+    print("Enter an expression with 'x' as the variable.")
+    print("Type 'quit' to exit.")
+    variable_calculator()
