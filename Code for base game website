@@ -1,0 +1,54 @@
+from flask import Flask, render_template_string, request
+
+app = Flask(__name__)
+
+index_html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #game-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Game Website</h1>
+    <div id="game-container">
+        <canvas id="game-canvas" width="800" height="600"></canvas>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('game-canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Draw something on the canvas
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(50, 50, 100, 100);
+
+            // Add event listener for mouse clicks
+            canvas.addEventListener('click', function(event) {
+                const x = event.clientX - canvas.getBoundingClientRect().left;
+                const y = event.clientY - canvas.getBoundingClientRect().top;
+                console.log('Clicked at (' + x + ', ' + y + ')');
+            });
+        });
+    </script>
+</body>
+</html>
+"""
+
+@app.route('/')
+def index():
+    return render_template_string(index_html)
+
+if __name__ == '__main__':
+    app.run(debug=True)
