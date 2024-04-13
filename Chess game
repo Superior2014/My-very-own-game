@@ -1,0 +1,41 @@
+class ChessGame:
+    def __init__(self):
+        self.board = self.create_board()
+
+    def create_board(self):
+        board = []
+        for _ in range(8):
+            board.append([' '] * 8)
+        # Place pieces
+        for i in range(8):
+            board[1][i] = 'P'  # White pawns
+            board[6][i] = 'p'  # Black pawns
+        board[0] = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']  # White pieces
+        board[7] = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']  # Black pieces
+        return board
+
+    def print_board(self):
+        for row in self.board:
+            print(' '.join(row))
+
+    def move_piece(self, start, end):
+        start_row, start_col = start
+        end_row, end_col = end
+        piece = self.board[start_row][start_col]
+        self.board[start_row][start_col] = ' '
+        self.board[end_row][end_col] = piece
+
+    def play_game(self):
+        player = 1
+        while True:
+            print(f"Player {player}'s turn:")
+            self.print_board()
+            start = tuple(map(int, input("Enter start position (row, col): ").split(',')))
+            end = tuple(map(int, input("Enter end position (row, col): ").split(',')))
+            self.move_piece(start, end)
+            player = 3 - player  # Switch players (1 -> 2, 2 -> 1)
+
+
+if __name__ == "__main__":
+    game = ChessGame()
+    game.play_game()
