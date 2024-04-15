@@ -1,0 +1,90 @@
+def start_game():
+    print("Whispers of the Forest III: Civilization of Shadows")
+    print("After restoring peace to the forest, a passage has opened, leading you to an ancient, hidden civilization.")
+    print("As you step through the lush foliage, the trees part to reveal a sprawling city made of stone, seemingly abandoned.")
+    print("Type 'help' anytime for options.")
+    main_square()
+
+def main_square():
+    print("\nYou are in the central square of the city, surrounded by stone buildings overgrown with vines.")
+    print("Paths lead to the library to the north, the temple to the east, and residential quarters to the west.")
+    choice = input("Where do you go? (library/temple/quarters/help) ").lower()
+
+    if choice == "library":
+        library()
+    elif choice == "temple":
+        temple()
+    elif choice == "quarters":
+        quarters()
+    elif choice == "help":
+        print("\nType 'library' to explore the center of knowledge.")
+        print("Type 'temple' to visit the place of worship.")
+        print("Type 'quarters' to see where the people lived.")
+        main_square()
+    else:
+        print("Unrecognized command. Please try again.")
+        main_square()
+
+def library():
+    print("\nThe library is filled with shelves of ancient books and scrolls, some crumbling at the edges.")
+    choice = input("Do you try to read the scrolls or return to the square? (read/return) ").lower()
+
+    if choice == "read":
+        read_scrolls()
+    elif choice == "return":
+        main_square()
+    else:
+        print("Unrecognized command. Please try again.")
+        library()
+
+def temple():
+    print("\nThe temple is a massive structure adorned with intricate carvings and statues. A strange light emanates from within.")
+    choice = input("Do you enter deeper into the temple or go back? (enter/back) ").lower()
+
+    if choice == "enter":
+        inner_sanctum()
+    elif choice == "back":
+        main_square()
+    else:
+        print("Unrecognized command. Please try again.")
+        temple()
+
+def quarters():
+    print("\nThe residential quarters are a series of small stone houses, many of which are partially collapsed.")
+    choice = input("Do you search the houses or return to the square? (search/return) ").lower()
+
+    if choice == "search":
+        search_houses()
+    elif choice == "return":
+        main_square()
+    else:
+        print("Unrecognized command. Please try again.")
+        quarters()
+
+def read_scrolls():
+    print("\nYou carefully unroll a scroll and discover it's a historical record of the civilization, mentioning a lost artifact.")
+    main_square()  # Possibly add options to pursue the artifact.
+
+def inner_sanctum():
+    print("\nInside the temple's sanctum, you find a glowing artifact on an altar. The air buzzes with power.")
+    choice = input("Do you touch the artifact or leave it alone? (touch/leave) ").lower()
+
+    if choice == "touch":
+        artifact_power()
+    elif choice == "leave":
+        main_square()
+    else:
+        print("Unrecognized command. Please try again.")
+        inner_sanctum()
+
+def search_houses():
+    print("\nIn one of the houses, you find a diary detailing daily life and hints at a secret meeting place.")
+    main_square()  
+
+def artifact_power():
+    print("\nAs you touch the artifact, visions of the civilization's past, present, and possible future flood your mind.")
+    print("You now have a decision to make about how to use this knowledge.")
+    main_square()  # Introduce a moral choice or quest decision here.
+
+if __name__ == "__main__":
+    start_game()
